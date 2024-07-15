@@ -1,10 +1,10 @@
 import { ponder } from "@/generated";
-ponder.on("Gol:evolve_board", async ({ event, context }) => {
+ponder.on("Gol:EvolveBoardEvent", async ({ event, context }) => {
   // const { Board } = context.entities;
   // const { board_id, address } = event.params;
 });
 
-ponder.on("Gol:EvolveBoardEvent", async ({ event, context }) => {
+ponder.on("Gol:NewBoardEvent", async ({ event, context }) => {
   // const { Board } = context.db;
   // const { board_id, address,  } = event.params;
   // query {
