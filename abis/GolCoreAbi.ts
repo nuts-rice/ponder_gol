@@ -46,10 +46,10 @@ export const GolCoreAbi = [
         internalType: "address",
       },
       {
-        name: "price",
-        type: "uint256",
+        name: "board_id",
+        type: "string",
         indexed: false,
-        internalType: "uint256",
+        internalType: "string",
       },
     ],
 
