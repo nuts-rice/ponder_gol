@@ -9,16 +9,9 @@ ponder.on("Gol:EvolveBoardEvent", async ({ event, context }) => {
     .fill(false)
     .map(() => new Array(WIDTH).fill(false));
 
-  await Board.upsert({
+  await Board.update({
     id: event.args.board_id,
-    create: {
-      grid: init_grid,
-      generation: 0,
-      users: [event.args.userAddress],
-      lastevolvedAt: Date.now(),
-      userGenerations: { user: event.args.userAddress, generations: 1 },
-    },
-    update: ({ current }) => ({
+    data: ({ current }) => ({
       grid: advanceGrid(current.grid),
       generation: current.generation + 1,
       users: current.users.includes(event.args.userAddress)
@@ -30,8 +23,6 @@ ponder.on("Gol:EvolveBoardEvent", async ({ event, context }) => {
         generations: current.userGenerations.generations + 1,
       },
     }),
-    // const { Board } = context.entities;
-    // const { board_id, address } = event.params;
   });
 
   ponder.on("Gol:NewBoardEvent", async ({ event, context }) => {
@@ -48,15 +39,8 @@ ponder.on("Gol:EvolveBoardEvent", async ({ event, context }) => {
         users: [event.args.userAddress],
         lastevolvedAt: Date.now(),
         userGenerations: { user: event.args.userAddress, generations: 1 },
+        spawnTimestamp: event.block.timestamp,
       },
     });
   });
 });
-// const { board_id, address,  } = event.params;
-// query {
-//   boards
-// }
-// const board = await Board.update({
-//   grid:
-// })
-// Save the board to the index

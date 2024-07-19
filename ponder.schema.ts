@@ -11,5 +11,6 @@ export default createSchema((p) => ({
     generation: p.int(),
     lastevolvedAt: p.int(),
     userGenerations: p.json<{ user: string; generations: number }>(),
+    spawnTimestamp: p.bigint(),
   }),
 }));
